@@ -1,0 +1,5 @@
+enum Endpoint {
+  all,
+  name,
+  
+}

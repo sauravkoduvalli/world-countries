@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 12.0,),
+              const SizedBox(height: 12.0,),
               // searchbar
               SearchTextField(
                 controller: searchTextEditController,
