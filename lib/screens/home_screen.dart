@@ -1,14 +1,29 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:world_countries/providers/country_provider.dart';
 import 'package:world_countries/providers/theme_provider.dart';
 import 'package:world_countries/widgets/search_text_field.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    CountryProvider().fetchCountries();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     TextEditingController searchTextEditController = TextEditingController();
+    final countryProvider = Provider.of<CountryProvider>(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -53,7 +68,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 12.0,),
+              const SizedBox(
+                height: 12.0,
+              ),
               // searchbar
               SearchTextField(
                 controller: searchTextEditController,
@@ -61,6 +78,25 @@ class HomeScreen extends StatelessWidget {
                   print(value);
                 },
               ),
+              // Countries List
+              countryProvider.isLoading
+                  ? const CircularProgressIndicator.adaptive()
+                  : countryProvider.errorMessage != null
+                      ? Center(
+                          child: Text(
+                          countryProvider.errorMessage ?? "error",
+                          style: const TextStyle(color: Colors.black),
+                        ))
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: countryProvider.countries.length,
+                          separatorBuilder: (context, index) => const Divider(),
+                          itemBuilder: (context, index) {
+                            log(countryProvider.countries[index].capital![0]
+                                .toString());
+                            return const CircularProgressIndicator.adaptive();
+                          },
+                        ),
             ],
           ),
         ),
