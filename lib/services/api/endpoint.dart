@@ -1,5 +1,0 @@
-enum Endpoint {
-  all,
-  name,
-  
-}

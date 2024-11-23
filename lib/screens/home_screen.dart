@@ -1,10 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:world_countries/providers/country_provider.dart';
-import 'package:world_countries/providers/theme_provider.dart';
-import 'package:world_countries/widgets/search_text_field.dart';
+
+import '../providers/country_provider.dart';
+import '../providers/theme_provider.dart';
+import '../widgets/country_list.dart';
+import '../widgets/search_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,11 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     TextEditingController searchTextEditController = TextEditingController();
-    final countryProvider = Provider.of<CountryProvider>(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -43,11 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text(
                         "Location",
                         style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w500),
+                            fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                       Text(
                         "Location Name",
-                        style: TextStyle(fontSize: 14.0, color: Colors.grey),
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
                       )
                     ],
                   ),
@@ -68,35 +67,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 12.0,
-              ),
+              const SizedBox(height: 8.0),
               // searchbar
               SearchTextField(
                 controller: searchTextEditController,
-                onChanged: (value) {
-                  print(value);
-                },
+                onChanged: (value) {},
               ),
+              // carousel slider
+              const SizedBox(height: 8.0),
               // Countries List
-              countryProvider.isLoading
-                  ? const CircularProgressIndicator.adaptive()
-                  : countryProvider.errorMessage != null
-                      ? Center(
-                          child: Text(
-                          countryProvider.errorMessage ?? "error",
-                          style: const TextStyle(color: Colors.black),
-                        ))
-                      : ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: countryProvider.countries.length,
-                          separatorBuilder: (context, index) => const Divider(),
-                          itemBuilder: (context, index) {
-                            log(countryProvider.countries[index].capital![0]
-                                .toString());
-                            return const CircularProgressIndicator.adaptive();
-                          },
-                        ),
+              const CountryList(),
             ],
           ),
         ),
@@ -104,3 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+const countryList = [
+  {
+    'name': 'India',
+    'code': '+91',
+  }
+];
