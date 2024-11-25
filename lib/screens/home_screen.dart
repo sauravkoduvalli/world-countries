@@ -84,10 +84,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-const countryList = [
-  {
-    'name': 'India',
-    'code': '+91',
-  }
-];

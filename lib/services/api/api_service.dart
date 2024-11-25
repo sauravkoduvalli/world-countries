@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -13,7 +14,9 @@ class ApiService {
       final url = Uri.parse(baseUrl + endpoint);
       final response = await _client.get(url);
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        final jsonData = response.body;
+        log(jsonData);
+        return jsonDecode(jsonData);
       }
     } catch (error) {
       throw Exception('Get method exception');
