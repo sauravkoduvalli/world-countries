@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:world_countries/providers/country_provider.dart';
-import 'package:world_countries/providers/theme_provider.dart';
-import 'package:world_countries/screens/home_screen.dart';
-import 'package:world_countries/utils/theme/dart_theme.dart';
-import 'package:world_countries/utils/theme/light_theme.dart';
+
+import 'providers/bottom_navbar_provider.dart';
+import 'providers/country_provider.dart';
+import 'providers/theme_provider.dart';
+import 'utils/app_theme.dart';
+import 'widgets/bottom_navbar_widget.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_)=> CountryProvider()),
+        ChangeNotifierProvider(create: (_) => CountryProvider()),
+        ChangeNotifierProvider(create: (_) => BottomNavbarProvider()),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
         return MaterialApp(
           title: 'Flutter Demo',
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: themeProvider.themeMode,
-          home: const HomeScreen(),
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.system,
+          home: const BottomNavBarWidget(),
         );
       }),
     );

@@ -1,4 +1,4 @@
-import 'package:world_countries/services/api/api_service.dart';
+import 'package:world_countries/services/api_service.dart';
 
 import '../models/country_model.dart';
 
