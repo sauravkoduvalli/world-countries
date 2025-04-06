@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.blue,
+    primaryColor: Colors.red,
     scaffoldBackgroundColor: Colors.white,
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.black),
+    colorScheme: const ColorScheme.light(
+      brightness: Brightness.light,
+      primary: Colors.green,
     ),
   );
 

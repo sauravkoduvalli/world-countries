@@ -33,7 +33,7 @@ class CountryList extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -45,8 +45,8 @@ class CountryList extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    const Icon(Icons.flag, size: 28),
-                                    const SizedBox(width: 8),
+                                    Icon(Icons.flag, size: 28),
+                                    SizedBox(width: 8),
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
@@ -54,14 +54,14 @@ class CountryList extends StatelessWidget {
                                       children: [
                                         Text(
                                           'a',
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                         Text(
                                           'b',
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w500,
                                           ),

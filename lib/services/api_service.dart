@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -15,7 +14,6 @@ class ApiService {
       final response = await _client.get(url);
       if (response.statusCode == 200) {
         final jsonData = response.body;
-        log(jsonData);
         return jsonDecode(jsonData);
       }
     } catch (error) {
